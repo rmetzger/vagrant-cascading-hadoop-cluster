@@ -30,13 +30,38 @@
       <name>yarn.web-proxy.address</name>
       <value>master.local:8100</value>
   </property>
-   <property>
+  <property>
       <name>yarn.log-aggregation-enable</name>
       <value>true</value>
   </property>
+  <property>
+    <name>yarn.nodemanager.resource.cpu-vcores</name>
+    <value>1</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.vmem-pmem-ratio</name>
+    <value>5</value>
+  </property>
+  <!-- 
+    Make sure that yarn.scheduler.minimum-allocation-mb <= yarn.nodemanager.resource.memory-mb
+  -->
+  <property>
+    <name>yarn.scheduler.minimum-allocation-mb</name>
+    <value>128</value>
+    <description>
+      Number of missed scheduling opportunities after which the CapacityScheduler
+      attempts to schedule rack-local containers.
+      Typically this should be set to number of nodes in the cluster, By default is setting
+      approximately number of nodes in one rack which is 40.
+    </description>
+  </property>
 
-  <!--property>
-      <name>yarn.nodemanager.resource.memory-mb</name>
-      <value>512</value>
-  </property-->
+  <!-- 
+    Set the amount of memory that is available on each nodeManager for a container.
+  -->
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>400</value>
+  </property>
+
 </configuration>
